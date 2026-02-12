@@ -13,10 +13,12 @@ const PORT = 5000;
 app.use(express.json());
 app.use(cors());
 
-// --- BAZA BILAN ALOQA ---
-mongoose.connect("mongodb://localhost:27017/restoran_db")
-  .then(() => console.log("Baza bilan aloqa o'rnatildi! ✅"))
-  .catch((err) => console.error("Bazaga ulanishda xato: ❌", err));
+// server.js ichida
+const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/restoran_db";
+
+mongoose.connect(mongoURI)
+  .then(() => console.log("Bazaga muvaffaqiyatli ulanildi! ✅"))
+  .catch((err) => console.log("Bazaga ulanishda xato: ", err));
 
 // 1. MAHSULOTLAR UCHUN MODEL
 const ProductSchema = new mongoose.Schema({
